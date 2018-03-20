@@ -13,3 +13,8 @@ data/news.2012.en.shuffled-norm0-phrase0
 data/news.2012.en.shuffled-norm0-phrase1
 data/news.2012.en.shuffled-norm1-phrase1
 data/vectors-phrase.bin
+
+#   Qiang Added
+.idea/
+CMakeLists.txt
+cmake-build-debug/
