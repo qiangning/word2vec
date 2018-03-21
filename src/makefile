@@ -1,3 +1,4 @@
+SHELL=/bin/bash
 SCRIPTS_DIR=../scripts
 BIN_DIR=../bin
 
