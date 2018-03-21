@@ -525,6 +525,10 @@ void *TrainModelThread(void *id) {
                             for (c = 0; c < layer1_size; c++) syn1[c + l2] += g * syn0[c + l1];
                         }
                     // NEGATIVE SAMPLING
+                    // QN explanation (notations in Xin Rong's tech notes):
+                    // syn0--> W, syn1neg-->W', (syn1-->W' only when "hierarchical sampling" is used instead of negative sampling
+                    // neu1e-->dE/dh
+                    // g-->tj-sigma(v_w_j * h)
                     if (negative > 0)
                         for (d = 0; d < negative + 1; d++) {
                             if (d == 0) {
@@ -544,7 +548,7 @@ void *TrainModelThread(void *id) {
                             else if (f < -MAX_EXP) g = (label - 0) * alpha;
                             else g = (label - expTable[(int) ((f + MAX_EXP) * (EXP_TABLE_SIZE / MAX_EXP / 2))]) * alpha;
                             for (c = 0; c < layer1_size; c++) neu1e[c] += g * syn1neg[c + l2];
-                            for (c = 0; c < layer1_size; c++) syn1neg[c + l2] += g * syn0[c + l1];
+                            for (c = 0; c < layer1_size; c++) syn1neg[c + l2] += g * syn0[c + l1];// QN: syn0==h in skip-gram model
                         }
                     // Learn weights input -> hidden
                     for (c = 0; c < layer1_size; c++) syn0[c + l1] += neu1e[c];
