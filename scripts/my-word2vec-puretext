@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DATA_DIR=../data
+BIN_DIR=../bin
+SRC_DIR=../src
+
+#FNAME=NYT-sample
+FNAME=NYT-500k
+
+TEXT_DATA=$DATA_DIR/$FNAME
+#VECTOR_DATA=$DATA_DIR/${FNAME}-puretext-vector.bin
+VECTOR_DATA=$DATA_DIR/${FNAME}-puretext-vector-skip.bin
+VOC_DATA=$DATA_DIR/${FNAME}-puretext-vocab
+
+pushd ${SRC_DIR} && make; popd
+
+if [ ! -e $VECTOR_DATA ]; then
+  echo -----------------------------------------------------------------------------------------------------
+  echo -- Training vectors...
+  time $BIN_DIR/my-word2vec -save-vocab $VOC_DATA -read-vocab $VOC_DATA -puretext 1 -train $TEXT_DATA -output $VECTOR_DATA -cbow 0 -size 200 -window 8 -negative 25 -hs 0 -sample 1e-4 -threads 20 -binary 1 -iter 15
+fi
+
+set -x
+$BIN_DIR/distance $VECTOR_DATA
