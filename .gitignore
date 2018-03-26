@@ -18,3 +18,4 @@ data/vectors-phrase.bin
 .idea/
 CMakeLists.txt
 cmake-build-debug/
+data/
