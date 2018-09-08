@@ -12,6 +12,8 @@ word2vec : word2vec.c
 	$(CC) word2vec.c -o ${BIN_DIR}/word2vec $(CFLAGS)
 my-word2vec : my-word2vec.c
 	$(CC) my-word2vec.c -o ${BIN_DIR}/my-word2vec $(CFLAGS)
+my-cluster : my-cluster.c
+	$(CC) my-cluster.c -o ${BIN_DIR}/my-cluster $(CFLAGS)
 word2phrase : word2phrase.c
 	$(CC) word2phrase.c -o ${BIN_DIR}/word2phrase $(CFLAGS)
 distance : distance.c

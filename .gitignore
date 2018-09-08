@@ -19,3 +19,4 @@ data/vectors-phrase.bin
 CMakeLists.txt
 cmake-build-debug/
 data/
+output/
